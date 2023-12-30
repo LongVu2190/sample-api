@@ -1,1 +1,1 @@
-export { default as sampleData } from "./sample/sample.js"
+export { default as sampleData } from "./sample/sample.js";

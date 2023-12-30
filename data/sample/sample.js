@@ -1,23 +1,17 @@
-import client from "../../config/database.js";
+import pool from "../../config/database.js";
 import loadSqlQueries from "../utils/loadSqlQueries.js";
 
 const getSampleById = async (sampleId) => {
+  const client = await pool.connect();
   try {
-    await client.connect();
-
-    client.on("error", (err) => {
-      console.error("Connection error", err);
-    });
-
     const sqlQueries = await loadSqlQueries("../data/sample/queries");
+    const res = await client.query(sqlQueries.selectSample, [sampleId]);
 
-    const { rows } = await client.query(sqlQueries.selectSample, [sampleId]);
-
-    client.end;
-
-    return rows;
+    return res.rows[0];
   } catch (error) {
     console.log(error.message);
+  } finally {
+    client.release();
   }
 };
 

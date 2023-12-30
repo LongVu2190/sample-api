@@ -1,1 +1,1 @@
-export { default as sampleController } from './sampleController.js';
+export { default as sampleController } from "./sampleController.js";

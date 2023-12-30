@@ -23,3 +23,5 @@ const generateRandomId = () => {
 
   return randomID;
 };
+
+export default generateRandomId;
